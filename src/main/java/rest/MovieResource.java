@@ -10,7 +10,9 @@ import facades.MovieFacade;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -63,12 +65,15 @@ public class MovieResource {
         return GSON.toJson(moviedto);
     }
 
-    @Path("test")
-    @GET
+    @POST
+    @Path("/addMovie")
+    
+    @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public String getTest() {
-        MovieDTOs dto = new MovieDTOs(FACADE.getAllMovies());
-        String gs = GSON.toJson(dto);
-        return gs;
+    public String addMovie(@PathParam("id") int id, String movie) {
+        MovieDTO toAdd = GSON.fromJson(movie, MovieDTO.class);
+        Movie added = FACADE.addMovie(toAdd.getTitle(), toAdd.getYear(), toAdd.getVotes());
+        return GSON.toJson(new MovieDTO(added));
+        
     }
 }

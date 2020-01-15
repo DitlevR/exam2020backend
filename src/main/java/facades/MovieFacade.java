@@ -65,5 +65,18 @@ public class MovieFacade {
         return result;
 
     }
+    
+    public Movie addMovie(String title, int year, double votes) {
+        EntityManager em = getEntityManager();
+        Movie m = new Movie(title, year, votes);
+        try {
+        em.getTransaction().begin();
+        em.persist(m);
+        em.getTransaction().commit();
+        return m;
+        } finally {
+            em.close();
+        }
+    }
 
 }

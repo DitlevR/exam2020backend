@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -23,6 +24,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "movies")
+@NamedQuery(name = "Movie.deleteAllRows", query = "DELETE from Movie")
 public class Movie implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -139,7 +141,9 @@ public class Movie implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Movie[ id=" + id + " ]";
+        return "title=" + title + ", year=" + year + ", votes=" + votes + ", directors=" + directors + ", actors=" + actors + ", genres=" + genres;
     }
+
+   
 
 }
