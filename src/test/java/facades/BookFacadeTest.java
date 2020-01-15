@@ -20,7 +20,7 @@ import utils.EMF_Creator.Strategy;
 public class BookFacadeTest {
 
     private static EntityManagerFactory emf;
-    private static FacadeExample facade;
+    private static MovieFacade facade;
 
     public BookFacadeTest() {
     }
@@ -33,7 +33,7 @@ public class BookFacadeTest {
                 "dev",
                 "ax2",
                 EMF_Creator.Strategy.CREATE);
-        facade = FacadeExample.getFacadeExample(emf);
+        facade = MovieFacade.getFacadeExample(emf);
     }
 
     /*   **** HINT **** 
@@ -45,7 +45,7 @@ public class BookFacadeTest {
     @BeforeAll
     public static void setUpClassV2() {
        emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST,Strategy.DROP_AND_CREATE);
-       facade = FacadeExample.getFacadeExample(emf);
+       facade = MovieFacade.getFacadeExample(emf);
     }
 
     @AfterAll
@@ -76,9 +76,6 @@ public class BookFacadeTest {
     }
 
     // TODO: Delete or change this method 
-    @Test
-    public void testAFacadeMethod() {
-        assertEquals(2, facade.getRenameMeCount(), "Expects two rows in the database");
-    }
+  
 
 }
