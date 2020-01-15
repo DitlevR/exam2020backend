@@ -24,12 +24,12 @@ public class SetupMovies {
 
     public static void main(String[] args) {
 //        EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.DEV, EMF_Creator.Strategy.DROP_AND_CREATE);
-        EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(
-                "pu",
-                "jdbc:mysql://206.81.20.15:3306/moviedb",
-                "ditlev",
-                "Harley27",
-                EMF_Creator.Strategy.CREATE);
+//        EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(
+//                "pu",
+//                "jdbc:mysql://206.81.20.15:3306/sem3project",
+//                "ditlev",
+//                "Harley27",
+//                EMF_Creator.Strategy.CREATE);
         EntityManager em = EMF.createEntityManager();
         Movie m1 = new Movie("The Lord of the Rings: The Fellowship of the Ring", 2001, 8.8);
         Movie m2 = new Movie("Catch Me If You Can", 2002, 8.1);
