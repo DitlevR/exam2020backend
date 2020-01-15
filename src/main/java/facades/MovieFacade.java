@@ -42,9 +42,9 @@ public class MovieFacade {
         EntityManager em = getEntityManager();
         List<Movie> movies = new ArrayList<>();
         try {
-            em.getTransaction().begin();
+            
             movies = em.createQuery("select m from Movie m", Movie.class).getResultList();
-            em.getTransaction().commit();
+            
             return movies;
         } finally {
             em.close();
