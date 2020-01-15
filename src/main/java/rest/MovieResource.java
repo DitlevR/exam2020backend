@@ -14,13 +14,22 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.SecurityContext;
+import javax.ws.rs.core.UriInfo;
 
 @Path("movie")
-public class RenameMeResource {
+public class MovieResource {
 
     private static EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.DEV, EMF_Creator.Strategy.CREATE);
     private static final MovieFacade FACADE = MovieFacade.getFacadeExample(EMF);
+
+    @Context
+    private UriInfo context;
+
+    @Context
+    SecurityContext securityContext;
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     @GET
@@ -45,7 +54,7 @@ public class RenameMeResource {
     @Path("/search/{search}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public String searchMovie (@PathParam("search") String title) {
+    public String searchMovie(@PathParam("search") String title) {
         List<Movie> movies = FACADE.searchForMovie(title);
         List<MovieDTO> moviedto = new ArrayList();
         for (Movie m : movies) {
@@ -54,5 +63,12 @@ public class RenameMeResource {
         return GSON.toJson(moviedto);
     }
 
-
+    @Path("test")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getTest() {
+        MovieDTOs dto = new MovieDTOs(FACADE.getAllMovies());
+        String gs = GSON.toJson(dto);
+        return gs;
+    }
 }
