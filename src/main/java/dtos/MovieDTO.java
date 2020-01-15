@@ -5,7 +5,12 @@
  */
 package dtos;
 
+import entities.Actor;
+import entities.Director;
+import entities.Genre;
 import entities.Movie;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -15,17 +20,25 @@ public class MovieDTO {
     private String title;
     private int year;
     private double votes;
-    private String directors_name;
-    private String actors;
-    private String genres;
+    private List<String> directors_name = new ArrayList();
+    private List<String> actors = new ArrayList();
+    private List<String> genres = new ArrayList();
     
-    private MovieDTO(Movie m) {
+    public MovieDTO(Movie m) {
         this.title = m.getTitle();
         this.year = m.getYear();
         this.votes = m.getVotes();
-        this.directors_name = m.getDirectors().toString();
-        this.actors = m.getActors().toString();
-        this.genres = m.getGenres().toString();
+        for(Director d : m.getDirectors()) {
+            this.directors_name.add(d.getName());
+        }
+        
+        for(Actor a : m.getActors()) {
+        this.actors.add(a.getName());
+        }
+        for(Genre g : m.getGenres()) {
+        this.genres.add(g.getGenreName());
+        }
+        
     }
     
     

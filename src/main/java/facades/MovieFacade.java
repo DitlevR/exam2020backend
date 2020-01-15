@@ -38,7 +38,6 @@ public class MovieFacade {
         return emf.createEntityManager();
     }
 
-
     public List<Movie> getAllMovies() {
         EntityManager em = getEntityManager();
         List<Movie> movies = new ArrayList<>();
@@ -50,6 +49,20 @@ public class MovieFacade {
         } finally {
             em.close();
         }
+
+    }
+
+    public List<Movie> searchForMovie(String title) {
+        EntityManager em = getEntityManager();
+        List<Movie> movies = getAllMovies();
+        List<Movie> result = new ArrayList();
+        for (Movie m : movies) {
+            if (m.getTitle().toLowerCase().contains(title.toLowerCase())) {
+                result.add(m);
+            }
+
+        }
+        return result;
 
     }
 
